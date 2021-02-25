@@ -52,4 +52,7 @@ env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('*.cpp'))
 
 ## 注意事项
 
-本项目是 C++开发的，如果在 C 代码中使用，需要把源文件的扩展名改为 cpp。
+* 本项目是 C++开发的，如果在 C 代码中使用，需要把源文件的扩展名改为 cpp。
+
+* Windows 上编译需要VS 2019。
+
