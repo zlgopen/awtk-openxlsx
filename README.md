@@ -57,7 +57,7 @@ env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('*.cpp'))
 > 如果源文件是放 src/openxlsx 中，则这样添加文件：
 
 ```
-env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('openxlsx/*.cpp'))
+env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('*.cpp') + Glob('openxlsx/*.cpp'))
 ```
 
 ### 4. 对于 android/ios，修改 build.json，在 sources 中增加下列文件：
@@ -71,6 +71,7 @@ env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('openxlsx/*.cpp'))
 > 如果源文件是放 src/openxlsx 中：
 
 ```
+      "src/*.cpp",
       "src/openxlsx/*.cpp",
       "src/openxlsx/*.hpp",
       "src/openxlsx/nowide/*.hpp",
