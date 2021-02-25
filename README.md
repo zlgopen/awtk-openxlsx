@@ -27,6 +27,14 @@ cd awtk-hello
 cp -rf ../awtk-openxlsx/src/* src
 ```
 
+如果嫌文件直接放到 src 目录下太乱，可以放到子目录中。
+
+```
+cd awtk-hello
+mkdir src/openxlsx
+cp -rf ../awtk-openxlsx/src/* src/openxlsx
+```
+
 ### 2. 修改 SConstruct，使用 cxx17 编译
 
 ```
@@ -34,12 +42,22 @@ helper = app.Helper(ARGUMENTS);
 helper.use_std_cxx(17)
 ```
 
-> 确保编译器支持 cxx17
+> 如果源文件是放 src/openxlsx 中，需要添加 CPPPATH:
+
+```
+helper.add_cpppath([os.path.join(helper.APP_ROOT, 'src/openxlsx')])
+```
 
 ### 3. 添加 cpp 文件到 src/SConscript
 
 ```
 env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('*.cpp'))
+```
+
+> 如果源文件是放 src/openxlsx 中，则这样添加文件：
+
+```
+env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('openxlsx/*.cpp'))
 ```
 
 ### 4. 对于 android/ios，修改 build.json，在 sources 中增加下列文件：
@@ -50,9 +68,27 @@ env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('*.cpp'))
       "src/nowide/*.hpp",
 ```
 
+> 如果源文件是放 src/openxlsx 中：
+
+```
+      "src/openxlsx/*.cpp",
+      "src/openxlsx/*.hpp",
+      "src/openxlsx/nowide/*.hpp",
+```
+
+> 如果源文件是放 src/openxlsx 中，还要添加 src/openxlsx 到 includes 中：
+
+```
+  "includes": [
+    "3rd/sqlite3",
+    ".",
+    "src",
+    "src/openxlsx"
+  ],
+```
+
 ## 注意事项
 
 * 本项目是 C++开发的，如果在 C 代码中使用，需要把源文件的扩展名改为 cpp。
 
-* Windows 上编译需要VS 2019。
-
+* Windows 上编译需要 VS 2019。
