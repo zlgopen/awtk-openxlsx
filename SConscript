@@ -4,4 +4,4 @@ import platform
 env=DefaultEnvironment().Clone()
 LIB_DIR=os.environ['LIB_DIR']
 
-env.Library(os.path.join(LIB_DIR, 'xlsx'), Glob('*.cpp') + Glob('sources/*.cpp'))
+env.Library(os.path.join(LIB_DIR, 'xlsx'), Glob('src/*.cpp'))

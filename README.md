@@ -10,15 +10,35 @@
 
 ## 使用方法
 
- * 可以按正常使用第三方库的的方式使用。
+> 这里以awtk-hello项目为例
 
- * 对于android/ios，可以直接拷贝到app的src目录下。
-
-
-## 注意事项
-
-需要使用cxx17编译
+### 1.拷贝文件到自己的项目
 
 ```
+cd awtk-hello
+cp -rf ../awtk-openxlsx/src/* src
+```
+
+### 2.修改SConstruct，使用cxx17编译
+
+```
+helper = app.Helper(ARGUMENTS);
 helper.use_std_cxx(17)
 ```
+
+> 确保编译器支持cxx17
+
+### 3.添加cpp文件到src/SConscript
+
+```
+env.Program(os.path.join(BIN_DIR, 'demo'), Glob('*.c') + Glob('*.cpp'))
+```
+
+### 4.对于android/ios，修改build.json，在sources中增加下列文件:
+
+```
+      "src/*.cpp",
+      "src/*.hpp",
+      "src/nowide/*.hpp",
+```
+
