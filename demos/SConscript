@@ -4,4 +4,5 @@ import sys
 env=DefaultEnvironment().Clone()
 BIN_DIR=os.environ['BIN_DIR'];
 
-env.Program(os.path.join(BIN_DIR, 'xlsx'), Glob('*.cpp'))
+env.Program(os.path.join(BIN_DIR, 'xlsx_create'), Glob('create.cpp'))
+env.Program(os.path.join(BIN_DIR, 'xlsx_modify'), Glob('modify.cpp'))
