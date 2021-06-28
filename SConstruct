@@ -9,4 +9,4 @@ helper.set_libs(['xlsx']).call(DefaultEnvironment)
 
 CustomWidgetSConscriptFiles = []
 SConscriptFiles = CustomWidgetSConscriptFiles + ['SConscript', 'demos/SConscript']
-SConscript(SConscriptFiles)
+helper.SConscript(SConscriptFiles)
